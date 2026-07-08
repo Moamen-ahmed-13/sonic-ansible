@@ -1,0 +1,15 @@
+---
+- name: Test Connection to SONiC Switch
+  hosts: all
+  gather_facts: no
+  connection: ansible.netcommon.network_cli
+
+  tasks:
+    - name: Gather SONiC System Facts
+      sonic.sonic.sonic_facts:
+        gather_subset: min
+      register: sonic_facts_result
+
+    - name: Display Switch Facts
+      debug:
+        var: sonic_facts_result
